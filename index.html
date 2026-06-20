@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Law Notes Vault – Premium Law Notes for LLB & CLAT Aspirants</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav id="navbar">
+  <a class="nav-brand" onclick="showPage('home')">
+    <img class="nav-logo" src="assets/logo.png" alt="Law Notes Vault Logo">
+    
+  </a>
+  <div class="nav-links" id="navLinks">
+    <a onclick="showPage('home'); closeNav();" href="#">Home</a>
+    <a onclick="showPage('home'); scrollToCatalogue(); closeNav();" href="#">Notes</a>
+    <a onclick="showPage('about'); closeNav();" href="#">About</a>
+    <a onclick="showPage('faq'); closeNav();" href="#">FAQ</a>
+    <a onclick="showPage('contact'); closeNav();" href="#">Contact</a>
+    <button class="cart-icon-btn" onclick="showPage('cart')">
+      🛒 Cart <span class="cart-count" id="cartCount">0</span>
+    </button>
+    <a class="nav-cta" onclick="showPage('home'); scrollToCatalogue(); closeNav();" href="#">Explore Notes</a>
+  </div>
+  <button class="hamburger" id="hamburger" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<!-- ═══════════════════════════════════════ HOME PAGE ═══════════════════════════════════════ -->
+<div id="home-page" class="page active">
+
+  <!-- HERO -->
+  <section id="hero-section">
+    <div class="hero-gold-line"></div>
+    <div class="hero-bg-text">LAW</div>
+    <div class="scales-decoration">⚖</div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">For LLB & CLAT Aspirants</div>
+      <h1 class="hero-title">
+        Master the Law.<br>
+        <em>Ace Every Exam.</em>
+      </h1>
+      <p class="hero-desc">
+        Structured, exam-focused PDF notes that simplify complex legal concepts through concise explanations, landmark case laws, and revision-ready formatting — crafted for serious law students.
+      </p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="scrollToCatalogue()">Explore Notes</button>
+        <button class="btn-outline" onclick="showPage('about')">About Us</button>
+      </div>
+      <div class="hero-stats-slim">
+        <div class="hero-stat-slim"><span class="hss-num">10+</span><span class="hss-label">Subjects</span></div>
+
+        <div class="hss-divider"></div>
+        <div class="hero-stat-slim"><span class="hss-num">PDF</span><span class="hss-label">Instant Access</span></div>
+        <div class="hss-divider"></div>
+        <div class="hero-stat-slim"><span class="hss-num">100%</span><span class="hss-label">Exam-Oriented</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES / WHY CHOOSE US -->
+
+  <!-- FEATURES -->
+  <section id="features-section">
+    <div class="section-header">
+      <div class="section-label">Why Choose Us</div>
+      <h2 class="section-title">Built for the serious law student</h2>
+      <p class="section-subtitle">Every note is crafted with one purpose — helping you perform at your best in exams and professional practice.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🎯</div>
+        <div class="feature-title">Exam-Oriented</div>
+        <p class="feature-desc">Content designed around actual examination patterns for LLB, CLAT and Judiciary aspirants. Nothing irrelevant.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚖️</div>
+        <div class="feature-title">Case Laws Included</div>
+        <p class="feature-desc">All landmark and important case laws are covered with brief facts, ratio decidendi and judgement summaries.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📜</div>
+        <div class="feature-title">Articles & Doctrines</div>
+        <p class="feature-desc">Important constitutional articles, legal doctrines and principles presented clearly — ready for quick revision.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📋</div>
+        <div class="feature-title">Structured Revision</div>
+        <p class="feature-desc">Organised with headings, sub-headings, numbered points and visual hierarchy for efficient last-minute revision.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💬</div>
+        <div class="feature-title">Plain Language</div>
+        <p class="feature-desc">Complex legal jargon broken down into simple, understandable language without losing legal precision.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📱</div>
+        <div class="feature-title">Instant PDF Delivery</div>
+        <p class="feature-desc">Receive your notes instantly via WhatsApp after payment. Study on any device, anytime, anywhere.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATALOGUE -->
+
+  <!-- CATALOGUE -->
+  <section id="catalogue-section">
+    <div class="section-header">
+      <div class="section-label">Subject Catalogue</div>
+      <h2 class="section-title">Premium Law Notes</h2>
+      <p class="section-subtitle">Our flagship edition — meticulously structured, case-rich, and exam-ready. More subjects coming soon.</p>
+    </div>
+    <div class="catalogue-grid" id="catalogueGrid">
+      <!-- populated by JS -->
+    </div>
+  </section>
+
+  <!-- LNV DIFFERENCE -->
+
+  <!-- WHY CHOOSE -->
+  <section id="why-choose-section">
+    <div class="section-label">The LNV Difference</div>
+    <h2 class="section-title">Why Students Choose Law Notes Vault<br>Over Free Notes</h2>
+    <p class="section-subtitle">Free notes are everywhere. Exam-focused, structured, and revision-friendly notes are not.</p>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-card-icon">🔍</div>
+        <div class="why-card-title">Sample Pages Preview</div>
+        <p class="why-card-desc">View actual pages before purchasing and know exactly what you're getting — no surprises, no disappointments.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-card-icon">📐</div>
+        <div class="why-card-title">Detailed Topic Coverage</div>
+        <p class="why-card-desc">Every topic is carefully organised with articles, concepts, landmark cases, and exam-oriented explanations in one place.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-card-icon">🎓</div>
+        <div class="why-card-title">Trusted by Law Students</div>
+        <p class="why-card-desc">Used and appreciated by BA LL.B and LL.B students across India preparing for university and Judiciary examinations.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-card-icon">✍️</div>
+        <div class="why-card-title">Prepared with Academic Precision</div>
+        <p class="why-card-desc">Professionally structured for faster learning, efficient revision, and better exam performance — not just content dumps.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOUNDERS -->
+
+  <!-- FOUNDERS -->
+  <section id="founders-section">
+    <div class="founders-layout">
+
+      <div class="founders-left">
+        <div class="section-label" style="color:var(--gold);">Built By Law Students</div>
+        <h2 class="section-title" style="color:var(--warm-white); margin-bottom:28px;">Built By Law Students,<br>For Law Students</h2>
+        <p class="founders-message">
+          "Built by law students, for law students. We created Law Notes Vault to provide structured, exam-focused, and revision-friendly notes that help students learn faster and perform better."
+        </p>
+        <div class="founders-pills">
+          <div class="founders-pill"><span class="founders-pill-check">✓</span> Built By Law Students</div>
+          <div class="founders-pill"><span class="founders-pill-check">✓</span> Exam-Oriented Notes</div>
+          <div class="founders-pill"><span class="founders-pill-check">✓</span> Trusted Study Resources</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</div><!-- /home-page -->
+
+<!-- ═══════════════════════════════════════ PRODUCT DETAIL PAGE ═══════════════════════════════════════ -->
+<div id="product-detail-page" class="page">
+  <div style="padding: 0 5vw 80px;">
+    <button class="detail-back" onclick="showPage('home')">← Back to Catalogue</button>
+    <div class="detail-layout" id="detailLayout">
+      <!-- populated by JS -->
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ CART PAGE ═══════════════════════════════════════ -->
+<div id="cart-page" class="page">
+  <div class="cart-container">
+    <h2 class="cart-title">Your Cart</h2>
+    <div id="cartItems"></div>
+    <div id="cartSummary"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ ABOUT PAGE ═══════════════════════════════════════ -->
+<div id="about-page" class="page">
+  <div class="about-hero">
+    <div class="about-hero-text">ABOUT</div>
+    <div class="section-label">Our Story</div>
+    <h1 class="about-title">Simplifying Law. Empowering Students.</h1>
+  </div>
+  <div class="about-body">
+    <p class="about-p">Law Notes Vault was founded with a singular mission: to make quality law education accessible to every serious student. We understand the pressure of law school — dense textbooks, complex judgements, vast syllabi — and we built a solution.</p>
+    <p class="about-p">Our notes provide structured, exam-focused content designed to simplify complex legal concepts through concise explanations, case laws, doctrines, articles, and revision-friendly formatting. Whether you're preparing for semester exams or the Judiciary, our materials are built to help you succeed.</p>
+    <p class="about-p">Each subject note is crafted by experienced law students and practitioners who understand exactly what examiners look for. We don't just summarise textbooks — we distil the essential, build logical structure, and present it in a format that works under examination pressure.</p>
+    <p class="about-p">Law Notes Vault is more than a notes platform. It's a commitment to the standard of legal education that every student deserves.</p>
+    <div style="margin-top:48px; padding:32px; background:var(--ivory); border-left:3px solid var(--gold);">
+      <div style="font-family:'Playfair Display',serif; font-size:1.1rem; font-style:italic; color:var(--charcoal); line-height:1.6;">
+        "The law is a jealous mistress and requires a long and constant courtship. It is not to be won by trifling favors but by lavish homage."
+      </div>
+      <div style="margin-top:12px; font-size:0.78rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--gold);">
+        — Justice Joseph Story
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ FAQ PAGE ═══════════════════════════════════════ -->
+<div id="faq-page" class="page" style="background:var(--warm-white); min-height:100vh; padding:140px 5vw 80px;">
+  <div class="max-content">
+    <div class="section-label">Help Centre</div>
+    <h1 class="section-title" style="margin-bottom:48px;">Frequently Asked Questions</h1>
+    <div id="faqList"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ CONTACT PAGE ═══════════════════════════════════════ -->
+<div id="contact-page" class="page">
+  <div class="section-label">Reach Out</div>
+  <h1 class="section-title" style="margin-bottom:48px;">Contact Us</h1>
+  <div class="contact-grid">
+    <div>
+      <div class="contact-block">
+        <div class="contact-label">WhatsApp</div>
+        <div class="contact-value">+91 8052950790</div>
+      </div>
+      <div class="contact-block">
+        <div class="contact-label">For Orders</div>
+        <div class="contact-value">Place your order directly via WhatsApp.<br>We respond within hours.</div>
+      </div>
+      <div class="contact-block">
+        <div class="contact-label">Delivery</div>
+        <div class="contact-value">Instant PDF delivery after payment confirmation.</div>
+      </div>
+      <a href="https://wa.me/918052950790?text=Hello%20Law%20Notes%20Vault%2C%20I%20have%20a%20query%20regarding%20your%20notes." target="_blank" class="btn-primary" style="margin-top:8px; display:inline-block;">
+        Chat on WhatsApp
+      </a>
+    </div>
+    <div>
+      <div class="contact-label" style="margin-bottom:16px;">Hours</div>
+      <p style="font-size:0.9rem; color:var(--grey-text); line-height:1.7;">
+        We are available Monday to Saturday, 10 AM to 8 PM IST. For urgent queries, WhatsApp is the fastest way to reach us.<br><br>
+        For bulk orders (multiple subjects), we offer special pricing. Contact us directly to discuss.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ PRIVACY POLICY PAGE ═══════════════════════════════════════ -->
+<div id="privacy-page" class="page policy-page">
+  <div class="max-content">
+    <h1 class="policy-title">Privacy Policy</h1>
+    <div class="policy-section">
+      <h3>Information We Collect</h3>
+      <p>When you contact Law Notes Vault via WhatsApp to place an order, we collect your name, phone number, and details of the products you order. This information is used solely to process your order and deliver your purchased notes.</p>
+    </div>
+    <div class="policy-section">
+      <h3>How We Use Your Information</h3>
+      <ul>
+        <li>To process and fulfil your order</li>
+        <li>To send you the purchased PDF notes</li>
+        <li>To respond to queries and provide customer support</li>
+        <li>To notify you of updates or new products (only with consent)</li>
+      </ul>
+    </div>
+    <div class="policy-section">
+      <h3>Data Security</h3>
+      <p>We take the security of your personal information seriously. Your data is not shared with third parties and is only used for order fulfilment purposes.</p>
+    </div>
+    <div class="policy-section">
+      <h3>Cookies</h3>
+      <p>This website does not use tracking cookies. It is a static informational site.</p>
+    </div>
+    <div class="policy-section">
+      <h3>Contact</h3>
+      <p>For any privacy-related queries, contact us on WhatsApp: +91 8052950790</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ TERMS PAGE ═══════════════════════════════════════ -->
+<div id="terms-page" class="page policy-page">
+  <div class="max-content">
+    <h1 class="policy-title">Terms & Conditions</h1>
+    <div class="policy-section">
+      <h3>Digital Products</h3>
+      <p>All products sold by Law Notes Vault are digital PDF files. Once a PDF has been delivered, no refunds will be issued. Please read the product description carefully before purchasing.</p>
+    </div>
+    <div class="policy-section">
+      <h3>Intellectual Property</h3>
+      <p>All notes, content and materials available on Law Notes Vault are the exclusive intellectual property of Law Notes Vault. You may not reproduce, redistribute, sell, or share these materials without prior written permission.</p>
+    </div>
+    <div class="policy-section">
+      <h3>Purchase Process</h3>
+      <p>Orders are placed via WhatsApp. Upon confirmation of payment, the PDF notes will be delivered to your WhatsApp number. Payment details will be shared upon order confirmation.</p>
+    </div>
+    <div class="policy-section">
+      <h3>Accuracy of Content</h3>
+      <p>While we make every effort to ensure the accuracy of our notes, Law Notes Vault does not guarantee that the content is completely free of errors. Students are advised to cross-reference with their official study materials.</p>
+    </div>
+    <div class="policy-section">
+      <h3>Governing Law</h3>
+      <p>These terms shall be governed by and construed in accordance with the laws of India.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ FOOTER ═══════════════════════════════════════ -->
+
+    <!-- TESTIMONIALS (moved: before footer) -->
+  <section id="social-proof-section-2" style="background:var(--charcoal); padding:88px 5vw;">
+    <div class="testimonials-header" style="text-align:center; margin-bottom:56px;">
+      <div class="testimonials-eyebrow">Student Testimonials</div>
+      <h2 class="testimonials-title">Trusted by students who <em>cleared their exams</em><br>with over 9.5 CGPA</h2>
+    </div>
+    <div class="testimonials-grid" id="testimonialsGrid2">
+
+      <div class="testimonial-card">
+        <div class="testimonial-stars">
+          <span class="testimonial-star">★</span>
+          <span class="testimonial-rating">5</span>
+        </div>
+        <p class="testimonial-quote">"The notes saved me weeks of preparation. Everything needed for exams was already organized and easy to revise."</p>
+        <div class="testimonial-divider"></div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">A</div>
+          <div>
+            <div class="testimonial-name">Ananya Singh</div>
+            <div class="testimonial-role">BA LL.B Student</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-stars">
+          <span class="testimonial-star">★</span>
+          <span class="testimonial-rating">4.9</span>
+        </div>
+        <p class="testimonial-quote">"Clear, concise, and packed with landmark cases. These notes made exam preparation much easier."</p>
+        <div class="testimonial-divider"></div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">P</div>
+          <div>
+            <div class="testimonial-name">Priya Rai</div>
+            <div class="testimonial-role">Judiciary Aspirant</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-stars">
+          <span class="testimonial-star">★</span>
+          <span class="testimonial-rating">4.9</span>
+        </div>
+        <p class="testimonial-quote">"My go-to resource before every semester exam. The structure and quality are excellent."</p>
+        <div class="testimonial-divider"></div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">A</div>
+          <div>
+            <div class="testimonial-name">Aryan Sharma</div>
+            <div class="testimonial-role">LL.B Student</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- HOME FAQ -->
+  <section id="home-faq-section">
+    <div class="home-faq-inner">
+      <div style="text-align:center; margin-bottom:56px;">
+        <div class="section-label" style="justify-content:center;">Quick Answers</div>
+        <h2 class="section-title">Everything You Need to Know</h2>
+        <p class="section-subtitle" style="margin:0 auto;">Simple answers to the most common questions before you purchase.</p>
+      </div>
+
+      <div class="home-faq-item">
+        <button class="home-faq-q" onclick="toggleHomeFAQ(this)">
+          How will I receive my notes?
+          <span class="home-faq-icon">+</span>
+        </button>
+        <div class="home-faq-a">Upon successful payment, the notes will be delivered digitally for instant access and download — directly to your WhatsApp number.</div>
+      </div>
+
+      <div class="home-faq-item">
+        <button class="home-faq-q" onclick="toggleHomeFAQ(this)">
+          Are the notes handwritten or typed?
+          <span class="home-faq-icon">+</span>
+        </button>
+        <div class="home-faq-a">All notes are professionally typed, structured, and designed for easy understanding and quick revision — no handwriting, no scanned pages.</div>
+      </div>
+
+      <div class="home-faq-item">
+        <button class="home-faq-q" onclick="toggleHomeFAQ(this)">
+          Are updates included?
+          <span class="home-faq-icon">+</span>
+        </button>
+        <div class="home-faq-a">Yes. Minor corrections and improvements may be provided when available. We are committed to keeping our notes accurate and current.</div>
+      </div>
+
+      <div class="home-faq-item">
+        <button class="home-faq-q" onclick="toggleHomeFAQ(this)">
+          What is the refund policy?
+          <span class="home-faq-icon">+</span>
+        </button>
+        <div class="home-faq-a">Due to the digital nature of the product, refunds cannot be provided after successful delivery. Please review the product description carefully before purchasing.</div>
+      </div>
+
+    </div>
+  </section>
+
+<footer id="site-footer">
+  <div class="footer-message-bar">
+    <p class="footer-message-text">"Thank you for choosing Law Notes Vault. We're committed to helping law students learn better, revise faster, and succeed with confidence."</p>
+  </div>
+  <div class="footer-main">
+    <div class="footer-brand-col">
+      <div class="footer-brand-name">Law Notes <span>Vault</span></div>
+      <p class="footer-tagline">Premium structured law notes for LLB & CLAT aspirants. Exam-focused, case-law rich, and revision-ready.</p>
+      <div class="footer-contact-block">
+        <div class="footer-contact-label">Email Support</div>
+        <a href="mailto:lawnotesvault@gmail.com" class="footer-contact-link">lawnotesvault@gmail.com</a>
+      </div>
+      <div class="footer-contact-block" style="margin-top:12px;">
+        <div class="footer-contact-label">WhatsApp Orders</div>
+        <a href="https://wa.me/918052950790" target="_blank" class="footer-contact-link">+91 8052950790</a>
+      </div>
+    </div>
+
+    <div class="footer-links-col">
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a onclick="showPage('home')">Home</a></li>
+        <li><a onclick="showPage('home'); scrollToCatalogue()">Browse Notes</a></li>
+        <li><a onclick="showPage('about')">About Us</a></li>
+        <li><a onclick="showPage('faq')">FAQs</a></li>
+        <li><a onclick="showPage('contact')">Contact</a></li>
+      </ul>
+      <div class="footer-col-title" style="margin-top:24px;">Legal</div>
+      <ul class="footer-links">
+        <li><a onclick="showPage('privacy')">Privacy Policy</a></li>
+        <li><a onclick="showPage('terms')">Terms & Conditions</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-founders-col">
+      <div class="footer-col-title">Meet The Founders</div>
+      <div class="footer-founder-card">
+        <div class="footer-founder-avatar">U</div>
+        <div>
+          <div class="footer-founder-name">Urvashi Verma</div>
+          <div class="footer-founder-role">Founder</div>
+          <div class="footer-founder-socials">
+            <a href="https://instagram.com/urvashhiverma" target="_blank" class="footer-social instagram">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+              @urvashhiverma
+            </a>
+            <a href="https://www.linkedin.com/in/urvashverma25?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" class="footer-social linkedin">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              LinkedIn
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-founder-card">
+        <div class="footer-founder-avatar">V</div>
+        <div>
+          <div class="footer-founder-name">Vaishnavi Singh</div>
+          <div class="footer-founder-role">Founder</div>
+          <div class="footer-founder-socials">
+            <a href="https://instagram.com/vaishnavisingghh" target="_blank" class="footer-social instagram">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+              @vaishnavisingghh
+            </a>
+            <a href="https://www.linkedin.com/in/vaishnavi-singh-524996343?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" class="footer-social linkedin">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              LinkedIn
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 Law Notes Vault. All rights reserved.</div>
+    <div class="footer-gold-line"></div>
+  </div>
+</footer>
+<script src="script.js"></script>
+
+<!-- SAMPLE PAGES MODAL -->
+<div id="sample-modal" onclick="smOutsideClose(event)">
+  <div class="sm-container" id="smContainer">
+
+    <!-- Header -->
+    <div class="sm-header">
+      <div class="sm-header-left">
+        <div class="sm-eyebrow">Sample Preview · Constitutional Law VOL I – LNV</div>
+        <div class="sm-title">Preview Actual Pages Before Purchasing</div>
+      </div>
+      <button class="sm-close" onclick="closeSampleModal()">✕</button>
+    </div>
+
+    <!-- Thumbnail strip -->
+    <div class="sm-thumbstrip" id="smThumbStrip">
+        <div class="sm-thumb active" onclick="smGoTo(0)">
+          <img src="assets/sample_0.png" alt="Constitutionalism">
+          <div class="sm-thumb-num">01</div>
+        </div>
+        <div class="sm-thumb " onclick="smGoTo(1)">
+          <img src="assets/sample_1.png" alt="Article 32">
+          <div class="sm-thumb-num">02</div>
+        </div>
+        <div class="sm-thumb " onclick="smGoTo(2)">
+          <img src="assets/sample_2.png" alt="Article 19">
+          <div class="sm-thumb-num">03</div>
+        </div>
+        <div class="sm-thumb " onclick="smGoTo(3)">
+          <img src="assets/sample_3.png" alt="Landmark Cases">
+          <div class="sm-thumb-num">04</div>
+        </div>
+        <div class="sm-thumb " onclick="smGoTo(4)">
+          <img src="assets/sample_4.png" alt="Article 21">
+          <div class="sm-thumb-num">05</div>
+        </div>
+        <div class="sm-thumb " onclick="smGoTo(5)">
+          <img src="assets/sample_5.png" alt="Article 13">
+          <div class="sm-thumb-num">06</div>
+        </div>
+    </div>
+
+    <!-- Main viewer -->
+    <div class="sm-viewer">
+
+      <!-- Image pane -->
+      <div class="sm-main-img-wrap">
+        <button class="sm-img-prev" onclick="smNav(-1)">←</button>
+        <img class="sm-main-img" id="smMainImg" src="assets/sample_0.png" alt="">
+        <button class="sm-img-next" onclick="smNav(1)">→</button>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sm-sidebar">
+        <div class="sm-sidebar-top">
+          <div class="sm-page-num" id="smPageNum">Page 01</div>
+          <div class="sm-page-topic" id="smPageTopic">Constitutionalism</div>
+          <div class="sm-page-sub" id="smPageSub">Foundation & Constitutional Concepts</div>
+        </div>
+
+        <div>
+          <div class="sm-pages-label">All Sample Pages</div>
+          <div class="sm-page-list">
+          <div class="sm-page-item active" id="smItem0" onclick="smGoTo(0)">
+            <span class="sm-page-item-num">01</span>
+            <span class="sm-page-item-name">Constitutionalism<br><span style="font-size:0.72rem;opacity:0.6;">Foundation & Constitutional Concepts</span></span>
+          </div>
+          <div class="sm-page-item " id="smItem1" onclick="smGoTo(1)">
+            <span class="sm-page-item-num">02</span>
+            <span class="sm-page-item-name">Article 32<br><span style="font-size:0.72rem;opacity:0.6;">Heart & Soul of the Constitution</span></span>
+          </div>
+          <div class="sm-page-item " id="smItem2" onclick="smGoTo(2)">
+            <span class="sm-page-item-num">03</span>
+            <span class="sm-page-item-name">Article 19<br><span style="font-size:0.72rem;opacity:0.6;">Protection of Freedom</span></span>
+          </div>
+          <div class="sm-page-item " id="smItem3" onclick="smGoTo(3)">
+            <span class="sm-page-item-num">04</span>
+            <span class="sm-page-item-name">Landmark Cases<br><span style="font-size:0.72rem;opacity:0.6;">Under Article 19</span></span>
+          </div>
+          <div class="sm-page-item " id="smItem4" onclick="smGoTo(4)">
+            <span class="sm-page-item-num">05</span>
+            <span class="sm-page-item-name">Article 21<br><span style="font-size:0.72rem;opacity:0.6;">Right to Life</span></span>
+          </div>
+          <div class="sm-page-item " id="smItem5" onclick="smGoTo(5)">
+            <span class="sm-page-item-num">06</span>
+            <span class="sm-page-item-name">Article 13<br><span style="font-size:0.72rem;opacity:0.6;">Laws Inconsistent with Fundamental Rights</span></span>
+          </div>
+          </div>
+        </div>
+
+        <div class="sm-cta">
+          <p class="sm-cta-text">Satisfied with the quality? Purchase now and get instant delivery on WhatsApp.</p>
+          <button class="sm-cta-btn" onclick="closeSampleModal(); buyNow(1);">Buy Now – ₹129</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="sm-counter" id="smCounter">Page 1 of 6</div>
+  </div>
+</div>
+
+<!-- CHECKOUT MODAL -->
+<div id="checkout-modal" onclick="checkoutOutsideClose(event)">
+  <div class="co-container" id="coContainer">
+    <div class="co-header">
+      <div>
+        <div class="co-eyebrow">Secure Checkout</div>
+        <div class="co-title" id="coTitle">Constitutional Law VOL I – LNV</div>
+      </div>
+      <button class="co-close" onclick="closeCheckout()">✕</button>
+    </div>
+
+    <div class="co-body">
+      <!-- Left: payment options -->
+      <div class="co-left">
+        <div class="co-price-row">
+          <div class="co-price-label">Order Total</div>
+          <div class="co-price-amount" id="coPriceAmount">₹129</div>
+        </div>
+
+        <div class="co-section-title">Choose Payment Method</div>
+
+        <!-- Option 1: WhatsApp -->
+        <div class="co-option" onclick="checkoutWhatsApp()">
+          <div class="co-option-icon co-icon-wa">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </div>
+          <div class="co-option-body">
+            <div class="co-option-title">WhatsApp Purchase</div>
+            <div class="co-option-sub">Chat directly · Instant confirmation</div>
+          </div>
+          <div class="co-option-arrow">→</div>
+        </div>
+
+        <!-- Option 2: UPI -->
+        <div class="co-option" onclick="toggleUPI()">
+          <div class="co-option-icon co-icon-upi">₹</div>
+          <div class="co-option-body">
+            <div class="co-option-title">UPI Payment</div>
+            <div class="co-option-sub">GPay · PhonePe · Paytm · Any UPI app</div>
+          </div>
+          <div class="co-option-arrow" id="upiArrow">↓</div>
+        </div>
+        <div class="co-upi-panel" id="upiPanel">
+          <div class="co-upi-inner">
+            <div class="co-upi-qr-wrap">
+              <div class="co-upi-qr-placeholder" id="upiQRWrap">
+              <img src="assets/qr.png" alt="UPI QR – Scan to Pay" id="upiQRImg">
+            </div>
+            </div>
+            <div class="co-upi-info">
+              <div class="co-upi-steps">
+                <div class="co-upi-step">1. Open your UPI app</div>
+                <div class="co-upi-step">2. Scan QR or enter UPI ID</div>
+                <div class="co-upi-step">3. Pay ₹<span id="coUpiAmt">99</span></div>
+                <div class="co-upi-step">4. Send screenshot to WhatsApp</div>
+              </div>
+              <div class="co-delivery-note">
+                <span class="co-delivery-icon">⚡</span>
+                <span>PDF delivered within minutes of payment confirmation</span>
+              </div>
+              <a class="co-wa-after-pay" href="https://wa.me/918052950790?text=Hi%20Law%20Notes%20Vault%2C%20I%20have%20completed%20UPI%20payment.%20Please%20send%20my%20notes." target="_blank">
+                📲 Send Payment Proof on WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Option 3: Card -->
+        <div class="co-option" onclick="toggleCard()">
+          <div class="co-option-icon co-icon-card">💳</div>
+          <div class="co-option-body">
+            <div class="co-option-title">Card / Net Banking</div>
+            <div class="co-option-sub">Debit · Credit · Net Banking</div>
+          </div>
+          <div class="co-option-arrow" id="cardArrow">↓</div>
+        </div>
+        <div class="co-card-panel" id="cardPanel">
+          <div class="co-card-inner">
+            <div class="co-card-notice">
+              <div class="co-card-notice-icon">ℹ️</div>
+              <div>
+                <div class="co-card-notice-title">Payment Gateway Coming Soon</div>
+                <p class="co-card-notice-text">Card payments are coming soon. Until then, use WhatsApp or UPI — both are instant, safe, and verified daily by our team.</p>
+                <button class="co-card-wa-btn" onclick="checkoutWhatsApp()">Order via WhatsApp Instead</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right: benefits -->
+      <div class="co-right">
+        <div class="co-benefits-title">Purchase Benefits</div>
+        <div class="co-benefits">
+          <div class="co-benefit"><span class="co-benefit-check">✓</span><span>Instant PDF Delivery</span></div>
+          <div class="co-benefit"><span class="co-benefit-check">✓</span><span>Secure Payment</span></div>
+          <div class="co-benefit"><span class="co-benefit-check">✓</span><span>One-Time Purchase</span></div>
+          <div class="co-benefit"><span class="co-benefit-check">✓</span><span>Lifetime Access</span></div>
+          <div class="co-benefit"><span class="co-benefit-check">✓</span><span>Unlimited Downloads</span></div>
+          <div class="co-benefit"><span class="co-benefit-check">✓</span><span>Instant Access After Payment</span></div>
+        </div>
+
+        <div class="co-product-preview">
+          <div class="co-product-preview-icon" id="coProdIcon">🏛️</div>
+          <div>
+            <div class="co-product-preview-name" id="coProdName">Constitutional Law VOL I</div>
+            <div class="co-product-preview-sub">LNV · Digital PDF</div>
+          </div>
+        </div>
+
+        <div class="co-automation-info">
+          <div class="co-automation-title">📋 For Full Auto-Delivery</div>
+          <p class="co-automation-text">To enable instant automatic PDF delivery after UPI/card payment without WhatsApp, you will need:<br>
+          • <strong>Payment Gateway</strong> — Razorpay or Cashfree (supports UPI + cards)<br>
+          • <strong>PDF Hosting</strong> — Google Drive or AWS S3 with expiring signed links<br>
+          • <strong>Email/WhatsApp API</strong> — for delivery automation<br>
+          Contact us to set this up.</p>
+        </div>
+
+        <div class="co-secure-badge">
+          <span>🔒</span>
+          <span>Secured & trusted checkout</span>
+        </div>
+
+        <div class="co-whatsapp-help">
+          Need help? <a href="https://wa.me/918052950790" target="_blank">Chat with us</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
