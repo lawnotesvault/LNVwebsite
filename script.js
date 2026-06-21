@@ -1,39 +1,12 @@
+// Initialize Supabase Client
+const supabaseUrl = 'https://ortuvtuiqtrwdimuokte.supabase.co';
+const supabaseKey = 'sb_publishable_alIoM5ItK8g1pCr6BBBzBA_tzEhyw2C';
+
+const { createClient } = supabase;
+const supabaseClient = createClient(supabaseUrl, supabaseKey);
+
 // ─── DATA ───
-const products = [
-  {
-    id: 1,
-    name: "Constitutional Law VOL I",
-    subtitle: "LNV Flagship Edition",
-    emoji: "🏛️",
-    color: "#8B1A1A",
-    colorLight: "#B22222",
-    price: 129,
-    badge: "FLAGSHIP EDITION",
-    samplePages: true,
-    coverImg: "assets/cover.jpg",
-    shortDesc: "The most comprehensive, exam-focused Constitutional Law notes for BA LL.B & LL.B students — structured, case-rich, and judiciary-ready.",
-    description: "Constitutional Law VOL I by Law Notes Vault is a meticulously structured, exam-oriented PDF note covering Articles 1–32 of the Indian Constitution in depth. Designed for BA LL.B and LL.B students preparing for semester examinations and Judiciary Services, this flagship edition distils complex constitutional provisions into clear, revision-friendly content — complete with landmark Supreme Court cases, doctrinal analysis, and bare act simplification.",
-    pages: 50,
-    whatsInside: [
-      "Articles 1–32 Covered",
-      "Fundamental Rights Explained",
-      "Landmark Supreme Court Cases",
-      "Important Constitutional Doctrines",
-      "Bare Act Language Simplified",
-      "Exam-Oriented Questions & Answers",
-      "Quick Revision Notes & Charts",
-      "Judiciary & University Exam Friendly"
-    ],
-    topics: ["Preamble & Nature of Constitution", "Fundamental Rights (Art. 12–32)", "Right to Equality (Art. 14–18)", "Right to Freedom (Art. 19–22)", "Right Against Exploitation (Art. 23–24)", "Right to Freedom of Religion (Art. 25–28)", "Cultural & Educational Rights (Art. 29–30)", "Right to Constitutional Remedies (Art. 32)", "Judicial Review & Basic Structure Doctrine", "Landmark Supreme Court Cases"],
-    features: ["50+ landmark case summaries with ratio decidendi", "Article-wise explanations in plain language", "Doctrines: Basic Structure, Harmonious Construction", "Previous year question hints embedded", "Revision tables for quick recap", "Exam pattern-aligned structure"],
-    faqs: [
-      { q: "Is this suitable for 1st year LLB students?", a: "Yes, this note covers the Constitutional Law syllabus for both LLB (3rd/4th semester) and BA LLB 5-year programs. It is also useful for Judiciary aspirants." },
-      { q: "Does it cover the latest amendments?", a: "Yes, the notes are updated to include recent constitutional amendments and significant Supreme Court judgements." },
-      { q: "How will I receive the PDF?", a: "After you place your order and complete payment via WhatsApp, the PDF will be delivered to your WhatsApp number immediately." },
-      { q: "Is VOL 2 available?", a: "VOL I covers Articles 1–32. VOL II covering DPSP, Fundamental Duties, and Emergency Provisions is coming soon. Stay tuned." }
-    ]
-  }
-];
+let products = [];
 
 const faqs = [
   { q: "How do I receive my notes after payment?", a: "After you click 'Buy Now' or 'Proceed to Checkout', you'll be directed to WhatsApp with a pre-filled message. Share your payment confirmation and your PDF notes will be delivered to you on WhatsApp within hours." },
@@ -81,8 +54,12 @@ function scrollToCatalogue() {
 // ─── CATALOGUE ───
 function renderCatalogue() {
   const grid = document.getElementById('catalogueGrid');
-  const p = products[0]; // Flagship only
-  grid.innerHTML = `
+  if (products.length === 0) {
+    grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--grey-mid); padding: 40px 0;">No notes available at the moment. Check back soon!</p>';
+    return;
+  }
+  
+  grid.innerHTML = products.map(p => `
     <div class="flagship-card" onclick="openProduct(${p.id})">
 
       <!-- Left: Cover Visual -->
@@ -90,25 +67,25 @@ function renderCatalogue() {
         <div class="flagship-cover-inner" style="${p.coverImg ? 'background:none;padding:0;' : 'background: linear-gradient(145deg, ' + p.color + ' 0%, ' + p.colorLight + ' 60%, #C0392B 100%);'}">
           ${p.coverImg
             ? '<img src="' + p.coverImg + '" alt="' + p.name + ' Cover" style="width:100%;height:100%;object-fit:cover;display:block;">'
-            : '<div class=\"flagship-cover-emblem\">' + p.emoji + '</div><div class=\"flagship-cover-vol\">VOL I</div><div class=\"flagship-cover-brand\">LNV</div>'
+            : '<div class="flagship-cover-emblem">' + (p.emoji || '🏛️') + '</div><div class="flagship-cover-vol">VOL I</div><div class="flagship-cover-brand">LNV</div>'
           }
         </div>
         <div class="flagship-badge-wrap">
-          <span class="flagship-badge">★ ${p.badge}</span>
+          ${p.badge ? `<span class="flagship-badge">★ ${p.badge}</span>` : ''}
         </div>
       </div>
 
       <!-- Right: Content -->
       <div class="flagship-body">
 
-        <div class="flagship-eyebrow">Constitutional Law · Digital PDF Notes</div>
+        <div class="flagship-eyebrow">Digital PDF Notes</div>
         <h3 class="flagship-title">${p.name} <span class="flagship-title-sub">– LNV</span></h3>
         <p class="flagship-desc">${p.shortDesc}</p>
 
         <!-- Meta pills -->
         <div class="flagship-meta">
           <div class="flagship-meta-pill">📄 ${p.pages}+ Pages</div>
-          <div class="flagship-meta-pill">⚖️ ${p.topics.length} Topics</div>
+          <div class="flagship-meta-pill">⚖️ ${p.topics ? p.topics.length : 0} Topics</div>
           <div class="flagship-meta-pill">📱 Instant PDF</div>
         </div>
 
@@ -116,12 +93,12 @@ function renderCatalogue() {
         <div class="flagship-inside">
           <div class="flagship-inside-title">What's Inside</div>
           <div class="flagship-inside-grid">
-            ${p.whatsInside.map(item => `
+            ${p.whatsInside ? p.whatsInside.map(item => `
               <div class="flagship-inside-item">
                 <span class="flagship-check">✓</span>
                 <span>${item}</span>
               </div>
-            `).join('')}
+            `).join('') : ''}
           </div>
         </div>
 
@@ -139,7 +116,7 @@ function renderCatalogue() {
 
       </div>
     </div>
-  `;
+  `).join('');
 }
 
 // ─── PRODUCT DETAIL ───
@@ -173,8 +150,8 @@ function openProduct(id) {
       </div>
       <p class="detail-desc">${p.description}</p>
 
-      <!-- Sample Pages Block (shown only when product has samplePages) -->
-      ${p.samplePages ? `
+      <!-- Sample Pages Block (shown only when product has samplePages AND is Constitutional Law) -->
+      ${(p.samplePages && p.name.includes("Constitutional")) ? `
       <div class="sample-preview-block">
         <p class="sample-preview-intro">Preview actual pages from <strong>${p.name} – LNV</strong> before purchasing. See the exact structure, depth, and quality of the notes.</p>
         <button class="btn-sample-pages" onclick="openSampleModal()">
@@ -529,6 +506,24 @@ document.addEventListener('keydown', e => {
   }
 });
 
+// Fetch products dynamically from Supabase
+async function fetchProducts() {
+  const { data, error } = await supabaseClient
+    .from('products')
+    .select('*')
+    .order('id', { ascending: true });
+    
+  if (error) {
+    console.error("Error fetching products:", error);
+    return;
+  }
+  
+  products = data;
+  renderCatalogue();
+}
+
 // ─── INIT ───
-renderCatalogue();
+fetchProducts().then(() => {
+  // Products loaded
+});
 renderFAQ();

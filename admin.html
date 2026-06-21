@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LNV Admin Dashboard – Law Notes Vault</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  /* Admin specific layout styles */
+  .admin-body {
+    background: var(--ivory);
+    min-height: 100vh;
+    padding-top: 100px;
+    padding-bottom: 80px;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .admin-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* Login Panel */
+  .login-card {
+    max-width: 420px;
+    margin: 60px auto 0;
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-top: 4px solid var(--gold);
+    padding: 40px 32px;
+    border-radius: 4px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.05);
+  }
+  .login-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--charcoal);
+    margin-bottom: 8px;
+    text-align: center;
+  }
+  .login-subtitle {
+    font-size: 0.85rem;
+    color: var(--grey-mid);
+    margin-bottom: 32px;
+    text-align: center;
+  }
+
+  /* Form Elements */
+  .form-group {
+    margin-bottom: 20px;
+  }
+  .form-label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--grey-text);
+    margin-bottom: 8px;
+  }
+  .form-input, .form-textarea, .form-select {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--border);
+    background: var(--warm-white);
+    color: var(--charcoal);
+    font-family: inherit;
+    font-size: 0.9rem;
+    border-radius: 2px;
+    transition: border-color 0.2s;
+  }
+  .form-input:focus, .form-textarea:focus, .form-select:focus {
+    outline: none;
+    border-color: var(--gold);
+  }
+  .form-textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  @media (max-width: 600px) {
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Buttons */
+  .btn-admin {
+    background: var(--charcoal);
+    color: var(--warm-white);
+    border: 1px solid var(--charcoal);
+    padding: 12px 24px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border-radius: 2px;
+  }
+  .btn-admin:hover {
+    background: var(--gold);
+    border-color: var(--gold);
+  }
+  .btn-admin-primary {
+    background: var(--crimson);
+    border-color: var(--crimson);
+    width: 100%;
+  }
+  .btn-admin-primary:hover {
+    background: var(--crimson-dark);
+    border-color: var(--crimson-dark);
+  }
+  .btn-admin-danger {
+    background: #c0392b;
+    border-color: #c0392b;
+    padding: 6px 12px;
+    font-size: 0.75rem;
+  }
+  .btn-admin-danger:hover {
+    background: #a93226;
+    border-color: #a93226;
+  }
+
+  /* Dashboard Panel */
+  .dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 20px;
+    margin-bottom: 32px;
+  }
+  .dashboard-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+  }
+  .dashboard-title span {
+    color: var(--gold);
+  }
+
+  .dashboard-layout {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 32px;
+  }
+  @media (max-width: 900px) {
+    .dashboard-layout {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .admin-card {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 32px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+  }
+  .admin-card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 12px;
+    color: var(--charcoal);
+  }
+
+  /* Notes list */
+  .notes-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .note-list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    background: var(--ivory);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+  }
+  .note-list-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .note-list-emoji {
+    font-size: 1.5rem;
+  }
+  .note-list-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+  .note-list-price {
+    font-size: 0.85rem;
+    color: var(--grey-mid);
+    margin-top: 2px;
+  }
+
+  /* File Helper Note */
+  .file-help {
+    font-size: 0.75rem;
+    color: var(--grey-mid);
+    margin-top: 4px;
+  }
+
+  /* Hidden Helper */
+  .hidden {
+    display: none !important;
+  }
+
+  /* Spinner */
+  .spinner {
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+  }
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+</style>
+</head>
+<body class="admin-body">
+
+<!-- NAVIGATION (Admin Static) -->
+<nav>
+  <div class="nav-brand">
+    <img class="nav-logo" src="assets/logo.png" alt="Law Notes Vault Logo">
+    <div class="nav-name">Law Notes <span>Vault</span> <small style="font-size:0.6rem; letter-spacing:0.1em; opacity:0.8; vertical-align:middle; margin-left:4px; border:1px solid var(--gold); padding:2px 4px; border-radius:2px;">ADMIN</small></div>
+  </div>
+  <div class="nav-links">
+    <a href="/" target="_blank">View Live Website ↗</a>
+  </div>
+</nav>
+
+<div class="admin-container">
+  
+  <!-- ════════════════════ LOG IN SCREEN ════════════════════ -->
+  <div id="login-panel" class="login-card">
+    <h2 class="login-title">Admin Login</h2>
+    <p class="login-subtitle">Sign in to manage Law Notes Vault content</p>
+    
+    <form id="loginForm" onsubmit="handleLogin(event)">
+      <div class="form-group">
+        <label class="form-label" for="loginEmail">Email Address</label>
+        <input class="form-input" type="email" id="loginEmail" placeholder="admin@lawnotesvault.com" required>
+      </div>
+      <div class="form-group" style="margin-bottom: 28px;">
+        <label class="form-label" for="loginPassword">Password</label>
+        <input class="form-input" type="password" id="loginPassword" placeholder="••••••••" required>
+      </div>
+      <button class="btn-admin btn-admin-primary" type="submit" id="loginBtn">
+        <span>Sign In</span>
+      </button>
+    </form>
+  </div>
+
+  <!-- ════════════════════ DASHBOARD SCREEN ════════════════════ -->
+  <div id="dashboard-panel" class="hidden">
+    
+    <div class="dashboard-header">
+      <div>
+        <h1 class="dashboard-title">Admin <span>Dashboard</span></h1>
+        <p style="font-size:0.85rem; color:var(--grey-mid); margin-top:4px;" id="adminUserEmail"></p>
+      </div>
+      <button class="btn-admin" onclick="handleLogout()">Sign Out</button>
+    </div>
+
+    <div class="dashboard-layout">
+      
+      <!-- Left: Create Form -->
+      <div class="admin-card">
+        <h3 class="admin-card-title">Publish New Law Note</h3>
+        
+        <form id="noteForm" onsubmit="handlePublish(event)">
+          
+          <div class="form-group">
+            <label class="form-label" for="noteName">Note Title (e.g. Constitutional Law VOL I)</label>
+            <input class="form-input" type="text" id="noteName" placeholder="Enter note title" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="noteSubtitle">Subtitle / Tagline</label>
+            <input class="form-input" type="text" id="noteSubtitle" placeholder="e.g. LNV Flagship Edition" required>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="notePrice">Price (in INR)</label>
+              <input class="form-input" type="number" id="notePrice" placeholder="129" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="notePages">Total Pages</label>
+              <input class="form-input" type="number" id="notePages" placeholder="50" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="noteEmoji">Icon / Emoji</label>
+              <input class="form-input" type="text" id="noteEmoji" placeholder="🏛️" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="noteBadge">Badge (Optional)</label>
+              <input class="form-input" type="text" id="noteBadge" placeholder="e.g. FLAGSHIP EDITION">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="noteColor">Color Theme (HEX)</label>
+              <input class="form-input" type="text" id="noteColor" placeholder="#8B1A1A" value="#8B1A1A" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="noteColorLight">Light Theme (HEX)</label>
+              <input class="form-input" type="text" id="noteColorLight" placeholder="#B22222" value="#B22222" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="noteShortDesc">Short Description (for catalogue card)</label>
+            <textarea class="form-textarea" id="noteShortDesc" placeholder="Brief summary of the notes..." required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="noteDesc">Detailed Description (for product page)</label>
+            <textarea class="form-textarea" id="noteDesc" placeholder="Full comprehensive description..." required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="noteWhatsInside">What's Inside (comma-separated list)</label>
+            <textarea class="form-textarea" id="noteWhatsInside" placeholder="Articles 1–32 Covered, Fundamental Rights Explained, Landmark Supreme Court Cases..." required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="noteTopics">Topics Covered (comma-separated list)</label>
+            <textarea class="form-textarea" id="noteTopics" placeholder="Preamble, Fundamental Rights, Article 19, Right to Life..." required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="noteFeatures">Key Features (comma-separated list)</label>
+            <textarea class="form-textarea" id="noteFeatures" placeholder="50+ landmark case summaries, Article-wise explanations, Revision tables..." required></textarea>
+          </div>
+
+          <!-- File Uploads -->
+          <div class="form-group">
+            <label class="form-label" for="noteCoverFile">Cover Image Upload</label>
+            <input class="form-input" type="file" id="noteCoverFile" accept="image/*" required>
+            <p class="file-help">JPG or PNG. Will be saved in 'notes-vault' storage bucket.</p>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 32px;">
+            <label class="form-label" for="notePdfFile">PDF Notes Upload</label>
+            <input class="form-input" type="file" id="notePdfFile" accept="application/pdf" required>
+            <p class="file-help">Upload the full notes PDF file.</p>
+          </div>
+
+          <button class="btn-admin btn-admin-primary" type="submit" id="publishBtn">
+            <span>Publish to Website</span>
+          </button>
+
+        </form>
+      </div>
+
+      <!-- Right: Current List -->
+      <div>
+        <div class="admin-card" style="margin-bottom: 24px;">
+          <h3 class="admin-card-title">Current Catalogue</h3>
+          <div class="notes-list" id="notesList">
+            <!-- Dynamically populated -->
+            <p style="color:var(--grey-mid); font-size:0.9rem;">Loading catalogue...</p>
+          </div>
+        </div>
+        
+        <div class="admin-card" style="background:var(--ivory); border-left:4px solid var(--gold); padding:20px;">
+          <h4 style="font-size:0.9rem; font-weight:600; text-transform:uppercase; letter-spacing:0.05em; color:var(--charcoal); margin-bottom:8px;">Storage Usage Tip</h4>
+          <p style="font-size:0.8rem; color:var(--grey-text); line-height:1.6;">Ensure your Supabase bucket <strong>'notes-vault'</strong> is set to <strong>Public</strong>, and that you have enabled public read access policies in the Supabase Dashboard, so customers can view cover images and download sample pages.</p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<!-- Supabase CDN Client -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="admin.js"></script>
+</body>
+</html>
