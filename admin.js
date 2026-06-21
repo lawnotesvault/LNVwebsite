@@ -211,15 +211,15 @@ async function handlePublish(e) {
       emoji,
       badge,
       color,
-      colorLight,
-      shortDesc,
+      colorlight: colorLight,
+      shortdesc: shortDesc,
       description,
-      whatsInside,
+      whatsinside: whatsInside,
       topics,
       features,
-      coverImg: coverImgUrl,
-      pdfUrl: pdfUrl,
-      samplePages: true,
+      coverimg: coverImgUrl,
+      pdfurl: pdfUrl,
+      samplepages: true,
       faqs
     };
     

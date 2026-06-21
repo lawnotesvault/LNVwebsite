@@ -64,9 +64,9 @@ function renderCatalogue() {
 
       <!-- Left: Cover Visual -->
       <div class="flagship-cover">
-        <div class="flagship-cover-inner" style="${p.coverImg ? 'background:none;padding:0;' : 'background: linear-gradient(145deg, ' + p.color + ' 0%, ' + p.colorLight + ' 60%, #C0392B 100%);'}">
-          ${p.coverImg
-            ? '<img src="' + p.coverImg + '" alt="' + p.name + ' Cover" style="width:100%;height:100%;object-fit:cover;display:block;">'
+        <div class="flagship-cover-inner" style="${p.coverimg ? 'background:none;padding:0;' : 'background: linear-gradient(145deg, ' + p.color + ' 0%, ' + p.colorlight + ' 60%, #C0392B 100%);'}">
+          ${p.coverimg
+            ? '<img src="' + p.coverimg + '" alt="' + p.name + ' Cover" style="width:100%;height:100%;object-fit:cover;display:block;">'
             : '<div class="flagship-cover-emblem">' + (p.emoji || '🏛️') + '</div><div class="flagship-cover-vol">VOL I</div><div class="flagship-cover-brand">LNV</div>'
           }
         </div>
@@ -80,7 +80,7 @@ function renderCatalogue() {
 
         <div class="flagship-eyebrow">Digital PDF Notes</div>
         <h3 class="flagship-title">${p.name} <span class="flagship-title-sub">– LNV</span></h3>
-        <p class="flagship-desc">${p.shortDesc}</p>
+        <p class="flagship-desc">${p.shortdesc}</p>
 
         <!-- Meta pills -->
         <div class="flagship-meta">
@@ -93,7 +93,7 @@ function renderCatalogue() {
         <div class="flagship-inside">
           <div class="flagship-inside-title">What's Inside</div>
           <div class="flagship-inside-grid">
-            ${p.whatsInside ? p.whatsInside.map(item => `
+            ${p.whatsinside ? p.whatsinside.map(item => `
               <div class="flagship-inside-item">
                 <span class="flagship-check">✓</span>
                 <span>${item}</span>
@@ -127,10 +127,10 @@ function openProduct(id) {
 
   document.getElementById('detailLayout').innerHTML = `
     <div class="detail-cover">
-      <div class="detail-cover-img" style="${p.coverImg ? 'background:none;padding:0;overflow:hidden;' : 'background: linear-gradient(135deg, ' + p.color + ', ' + p.colorLight + ');'}">
-        ${p.coverImg
-          ? '<img src="' + p.coverImg + '" alt="' + p.name + ' Cover" style="width:100%;height:100%;object-fit:cover;display:block;">'
-          : '<div style=\"font-size:5rem; opacity:0.9;\">' + p.emoji + '</div>'
+      <div class="detail-cover-img" style="${p.coverimg ? 'background:none;padding:0;overflow:hidden;' : 'background: linear-gradient(135deg, ' + p.color + ', ' + p.colorlight + ');'}">
+        ${p.coverimg
+          ? '<img src="' + p.coverimg + '" alt="' + p.name + ' Cover" style="width:100%;height:100%;object-fit:cover;display:block;">'
+          : '<div style="font-size:5rem; opacity:0.9;">' + p.emoji + '</div>'
         }
       </div>
       <div style="display:flex;gap:8px;flex-wrap:wrap;">
@@ -151,7 +151,7 @@ function openProduct(id) {
       <p class="detail-desc">${p.description}</p>
 
       <!-- Sample Pages Block (shown only when product has samplePages AND is Constitutional Law) -->
-      ${(p.samplePages && p.name.includes("Constitutional")) ? `
+      ${(p.samplepages && p.name.includes("Constitutional")) ? `
       <div class="sample-preview-block">
         <p class="sample-preview-intro">Preview actual pages from <strong>${p.name} – LNV</strong> before purchasing. See the exact structure, depth, and quality of the notes.</p>
         <button class="btn-sample-pages" onclick="openSampleModal()">
@@ -269,7 +269,7 @@ function renderCart() {
 
   container.innerHTML = cart.map(p => `
     <div class="cart-item">
-      <div class="cart-item-icon" style="background: linear-gradient(135deg, ${p.color}, ${p.colorLight});">
+      <div class="cart-item-icon" style="background: linear-gradient(135deg, ${p.color}, ${p.colorlight});">
         ${p.emoji}
       </div>
       <div class="cart-item-name">${p.name}</div>
